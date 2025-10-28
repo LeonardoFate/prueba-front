@@ -1,0 +1,77 @@
+.facturacion-container {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.submenu-bar {
+  background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+  padding: 15px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+  color: white;
+  font-size: 18px;
+  padding: 5px 15px;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  color: #e0e0e0;
+}
+
+.submenu-nav {
+  display: flex;
+  gap: 30px;
+  margin-left: 20px;
+}
+
+.submenu-item {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.submenu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.submenu-item.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+.module-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 15px;
+}
+
+.content-area {
+  padding: 30px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .submenu-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .submenu-item {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .module-title {
+    display: none;
+  }
+}

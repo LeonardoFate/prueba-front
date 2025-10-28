@@ -1,0 +1,35 @@
+<div class="facturacion-container">
+  <!-- Submenu de Facturación -->
+  <div class="submenu-bar">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center">
+        <button class="btn btn-link back-button" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <nav class="submenu-nav">
+          <a 
+            *ngFor="let item of submenuItems" 
+            [class.active]="isActive(item.route)"
+            (click)="navigateTo(item.route)"
+            class="submenu-item"
+          >
+            {{ item.label }}
+          </a>
+        </nav>
+        <div class="ml-auto">
+          <span class="module-title">Facturación</span>
+          <button class="btn btn-sm btn-outline-light ml-2">
+            <i class="fas fa-question-circle"></i> Ayuda
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Area -->
+  <div class="content-area">
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

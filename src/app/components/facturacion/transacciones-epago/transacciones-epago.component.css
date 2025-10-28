@@ -1,0 +1,334 @@
+.transacciones-epago-container {
+  padding: 25px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.breadcrumb-section {
+  font-size: 13px;
+  color: #6c757d;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.breadcrumb-item {
+  color: #adb5bd;
+}
+
+.breadcrumb-item.active {
+  color: #495057;
+  font-weight: 600;
+}
+
+/* Card de Filtros Mejorada */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  background: white;
+}
+
+.card-body {
+  padding: 25px;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-control {
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-control:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Botones Mejorados */
+.btn {
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  padding: 10px 20px;
+  border: none;
+}
+
+.btn-icon {
+  padding: 10px 14px;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #357ABD 0%, #2868A8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #5B7FDB 0%, #4A6FCC 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(91, 127, 219, 0.3);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #4A6FCC 0%, #3D5FBD 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(91, 127, 219, 0.4);
+}
+
+.btn-light {
+  background: white;
+  border: 1px solid #dee2e6;
+  color: #6c757d;
+}
+
+.btn-light:hover {
+  background: #f8f9fa;
+  border-color: #adb5bd;
+  color: #495057;
+}
+
+/* Tabla Mejorada */
+.table-responsive {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.table {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+.table thead th {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #495057;
+  font-weight: 700;
+  border-bottom: 2px solid #dee2e6;
+  padding: 14px 12px;
+  white-space: nowrap;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table tbody td {
+  padding: 14px 12px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 0 #4A90E2;
+}
+
+/* Botones de Acción Mejorados */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.action-buttons .btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.action-buttons .btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.action-buttons .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+  transform: scale(1.05);
+}
+
+.action-buttons .btn-outline-primary {
+  border-color: #4A90E2;
+  color: #4A90E2;
+}
+
+.action-buttons .btn-outline-primary:hover {
+  background-color: #4A90E2;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Badges Mejorados */
+.badge {
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.badge-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+/* Modal Mejorado */
+.modal-content {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 2px solid #dee2e6;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  padding: 20px 25px;
+}
+
+.modal-title {
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.modal-body {
+  padding: 30px 25px;
+}
+
+.modal-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 20px 25px;
+}
+
+/* Input Group Mejorado */
+.input-group-text {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6;
+  font-weight: 700;
+  color: #495057;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+/* Loading Spinner */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 4px;
+}
+
+/* Checkbox Mejorado */
+.form-check-input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border: 2px solid #dee2e6;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.form-check-input:checked {
+  background-color: #4A90E2;
+  border-color: #4A90E2;
+}
+
+.form-check-label {
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+}
+
+/* Alert Personalizada */
+.alert {
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 14px 18px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #fee 0%, #fdd 100%);
+  color: #c33;
+  border-left: 4px solid #dc3545;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .table {
+    font-size: 11px;
+  }
+
+  .table thead th,
+  .table tbody td {
+    padding: 10px 6px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .action-buttons .btn {
+    width: 100%;
+  }
+}
+
+/* Animaciones */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: slideIn 0.4s ease;
+}

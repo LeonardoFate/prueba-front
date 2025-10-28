@@ -1,0 +1,63 @@
+.transacciones-emitidas-container {
+  padding: 20px;
+}
+
+.breadcrumb-section {
+  font-size: 14px;
+  color: #666;
+}
+
+.card-header.bg-primary {
+  background-color: #4A90E2 !important;
+}
+
+.table {
+  font-size: 12px;
+}
+
+.table thead th {
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table tbody td {
+  vertical-align: middle;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.pagination-container {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+}
+
+.pagination .page-link {
+  color: #4A90E2;
+  border: 1px solid #dee2e6;
+  padding: 8px 12px;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #4A90E2;
+  border-color: #4A90E2;
+  color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
+.pagination .page-link:hover {
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+}

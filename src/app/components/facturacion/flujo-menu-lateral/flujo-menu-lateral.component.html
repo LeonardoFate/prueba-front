@@ -1,0 +1,341 @@
+<div class="flujo-menu-lateral-container">
+  <div class="row no-gutters">
+    <!-- Menú Lateral -->
+    <div class="col-md-3 sidebar">
+      <!-- Información del Paciente -->
+      <div class="patient-card">
+        <div class="patient-header">
+          <div class="patient-avatar">
+            <i class="fas fa-user-circle fa-3x"></i>
+          </div>
+          <div class="patient-info">
+            <h5 class="patient-name">{{ patientInfo.name }}</h5>
+            <p class="patient-age">{{ patientInfo.age }}</p>
+          </div>
+        </div>
+        <div class="patient-actions">
+          <button class="btn btn-sm btn-outline-primary btn-block mb-2">Visión 360</button>
+          <button class="btn btn-sm btn-outline-secondary btn-block">Actualizar Datos</button>
+        </div>
+      </div>
+
+      <!-- Menu Items -->
+      <nav class="sidebar-menu">
+        <div 
+          *ngFor="let item of menuItems; let i = index" 
+          class="menu-item"
+          [class.active]="selectedSection === item.id"
+          (click)="selectSection(item.id)"
+        >
+          <div class="menu-number">{{ i + 1 }}</div>
+          <div class="menu-label">{{ item.label }}</div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="col-md-9 main-content">
+      <!-- Header con tabs -->
+      <div class="content-header">
+        <div class="breadcrumb-path">
+          Historia Clínica > Atención
+        </div>
+        <div class="action-tabs">
+          <button class="tab-button">Enviar Correo</button>
+          <button class="tab-button">Evt. Adverso</button>
+          <button class="tab-button">Ver Historial</button>
+          <button class="tab-button">Cerrar Historia</button>
+          <button class="tab-button active">Consulta CDS</button>
+          <button class="tab-button">Guardar Sección</button>
+        </div>
+      </div>
+
+      <!-- Contenido según sección seleccionada -->
+      <div class="content-body">
+        <!-- Ordenes para factura manual -->
+        <div *ngIf="selectedSection === 'ordenes-factura-manual'" class="section-content">
+          <div class="section-header">
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-primary mr-3">
+                <i class="fas fa-plus-circle mr-1"></i> Nueva Orden
+              </button>
+              <div class="action-buttons">
+                <button class="btn btn-sm btn-success mr-2">
+                  <i class="fas fa-check-circle mr-1"></i> Crear Orden
+                </button>
+                <button class="btn btn-sm btn-danger">
+                  <i class="fas fa-times-circle mr-1"></i> Anular Orden
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="text-center my-4">Ordenes Para Factura Manual</h4>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">N° de Orden</label>
+              <input type="text" class="form-control" placeholder="Buscar orden">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Paciente</label>
+              <input type="text" class="form-control" placeholder="Buscar paciente">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Fecha</label>
+              <input type="text" class="form-control" placeholder="dd/mm/yyyy">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Tipo Orden</label>
+              <select class="form-control">
+                <option>Seleccionar...</option>
+                <option>Consulta Externa</option>
+                <option>Emergencia</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Atención Preferencial</label>
+              <select class="form-control">
+                <option>Seleccionar...</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="form-check">
+                <input type="radio" class="form-check-input" name="tipo" id="urgente">
+                <label class="form-check-label" for="urgente">Urgente</label>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="form-label">Médico Interno</label>
+                  <input type="text" class="form-control" disabled>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Médico Externo</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección de Diagnósticos -->
+          <div class="diagnostics-section mt-4">
+            <div class="row">
+              <div class="col-md-4">
+                <h6>Diagnóstico Principal</h6>
+                <div class="diagnostic-search">
+                  <input type="text" class="form-control mb-2" placeholder="Código CIE">
+                  <input type="text" class="form-control" placeholder="Nombre Diagnóstico">
+                  <button class="btn btn-sm btn-primary mt-2">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                <div class="diagnostic-results mt-3">
+                  <!-- Lista de resultados -->
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h6>Diagnóstico Secundario 1</h6>
+                <div class="diagnostic-search">
+                  <input type="text" class="form-control mb-2" placeholder="Código CIE">
+                  <input type="text" class="form-control" placeholder="Nombre Diagnóstico">
+                  <button class="btn btn-sm btn-primary mt-2">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h6>Diagnóstico Secundario 2</h6>
+                <div class="diagnostic-search">
+                  <input type="text" class="form-control mb-2" placeholder="Código CIE">
+                  <input type="text" class="form-control" placeholder="Nombre Diagnóstico">
+                  <button class="btn btn-sm btn-primary mt-2">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cierre de caja -->
+        <div *ngIf="selectedSection === 'cierre-caja'" class="section-content">
+          <div class="section-header">
+            <button class="btn btn-sm btn-secondary">
+              <i class="fas fa-arrow-left mr-1"></i> Regresar
+            </button>
+          </div>
+
+          <h4 class="text-center my-4">Cierre de Caja</h4>
+
+          <div class="cash-register-section">
+            <div class="row">
+              <div class="col-md-6">
+                <h6>Efectivo</h6>
+                <div class="cash-input-grid">
+                  <div class="row mb-2" *ngFor="let bill of ['$ 100', '$ 50', '$ 20', '$ 10', '$ 5', '$ 2', '$ 1']">
+                    <div class="col-6">
+                      <span class="bill-label">{{ bill }}</span>
+                    </div>
+                    <div class="col-6">
+                      <input type="number" class="form-control form-control-sm" value="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h6>Monedas</h6>
+                <div class="cash-input-grid">
+                  <div class="row mb-2" *ngFor="let coin of ['$ 1', '$ 0.50', '$ 0.25', '$ 0.10', '$ 0.05', '$ 0.01']">
+                    <div class="col-6">
+                      <span class="coin-label">{{ coin }}</span>
+                    </div>
+                    <div class="col-6">
+                      <input type="number" class="form-control form-control-sm" value="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="totals-section mt-4">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="total-box">
+                    <label>Total Billetes</label>
+                    <div class="total-value">$ 0.00</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="total-box">
+                    <label>Total Monedas</label>
+                    <div class="total-value">$ 0.00</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="total-box highlight">
+                    <label>Total efectivo en Cajero</label>
+                    <div class="total-value">$ 0.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <button class="btn btn-primary mr-2">
+                <i class="fas fa-save mr-2"></i>Cerrar Caja
+              </button>
+              <button class="btn btn-secondary">
+                <i class="fas fa-print mr-2"></i>Imprimir
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Registros Facturas -->
+        <div *ngIf="selectedSection === 'registros-facturas'" class="section-content">
+          <div class="section-header">
+            <button class="btn btn-sm btn-secondary">
+              <i class="fas fa-arrow-left mr-1"></i> Regresar
+            </button>
+          </div>
+
+          <h4 class="text-center my-4">Registro de Facturas Manuales</h4>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header bg-light">
+                  <h6 class="mb-0">Papeleta de Depósito</h6>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>N° Papeleta *</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Banco</label>
+                    <select class="form-control">
+                      <option>Banco De La Produccion S A Produbanco</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Cuenta Bancaria *</label>
+                    <select class="form-control">
+                      <option>2005132890</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha Depósito</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Valor Total Efectivo</label>
+                    <input type="text" class="form-control" value="$ 147.46" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header bg-light">
+                  <h6 class="mb-0">Registro de Facturas Manuales</h6>
+                </div>
+                <div class="card-body">
+                  <p class="text-muted">Último N° Factura Manual del Block (Sgf. Fact. Disponible) *</p>
+                  <div class="invoice-blocks">
+                    <!-- Se listarían los bloques de facturas aquí -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mt-3">
+                <div class="card-header bg-light">
+                  <h6 class="mb-0">Registro de Notas de Crédito Manuales</h6>
+                </div>
+                <div class="card-body">
+                  <p class="text-muted">Último N° Nota Crédito Manual del Block (Sgf. N/C Disponible) *</p>
+                  <div class="invoice-blocks">
+                    <!-- Se listarían los bloques de notas de crédito aquí -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <button class="btn btn-primary mr-2">
+              <i class="fas fa-check mr-2"></i>Consolidar Cliente
+            </button>
+            <button class="btn btn-secondary">
+              <i class="fas fa-print mr-2"></i>Imprimir
+            </button>
+          </div>
+        </div>
+
+        <!-- Otras secciones -->
+        <div *ngIf="selectedSection === 'diagnosticos'" class="section-content">
+          <h4 class="text-center my-5">Sección de Diagnósticos</h4>
+          <p class="text-center text-muted">Contenido en desarrollo...</p>
+        </div>
+
+        <div *ngIf="selectedSection === 'procedimiento-medico'" class="section-content">
+          <h4 class="text-center my-5">Procedimiento Médico</h4>
+          <p class="text-center text-muted">Contenido en desarrollo...</p>
+        </div>
+
+        <div *ngIf="selectedSection === 'recomendaciones'" class="section-content">
+          <h4 class="text-center my-5">Recomendaciones</h4>
+          <p class="text-center text-muted">Contenido en desarrollo...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

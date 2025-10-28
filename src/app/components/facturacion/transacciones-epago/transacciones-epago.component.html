@@ -1,0 +1,302 @@
+<div class="transacciones-epago-container">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-section mb-3">
+    <span class="breadcrumb-item">Gestión</span>
+    <i class="fas fa-chevron-right mx-2"></i>
+    <span class="breadcrumb-item active">Transacciones Epago</span>
+  </div>
+
+  <!-- Filtros -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <!-- Código Epago -->
+        <div class="col-md-3 mb-3">
+          <label for="codigoEpago" class="form-label">Cód. EPago</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="codigoEpago"
+            [(ngModel)]="filters.codigoEpago"
+            placeholder="Ingrese código"
+          />
+        </div>
+
+        <!-- Paciente (Deshabilitado según instrucciones) -->
+        <div class="col-md-3 mb-3">
+          <label for="paciente" class="form-label">Paciente</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="paciente"
+            disabled
+            placeholder="No disponible"
+          />
+        </div>
+
+        <!-- Fecha Desde -->
+        <div class="col-md-2 mb-3">
+          <label for="fechaDesde" class="form-label">Fecha Desde</label>
+          <input 
+            type="text" 
+            class="form-control datepicker" 
+            id="fechaDesde"
+            [(ngModel)]="filters.fechaDesde"
+            placeholder="dd/mm/yyyy"
+          />
+        </div>
+
+        <!-- Fecha Hasta -->
+        <div class="col-md-2 mb-3">
+          <label for="fechaHasta" class="form-label">Fecha Hasta</label>
+          <input 
+            type="text" 
+            class="form-control datepicker" 
+            id="fechaHasta"
+            [(ngModel)]="filters.fechaHasta"
+            placeholder="dd/mm/yyyy"
+          />
+        </div>
+
+        <!-- Cajero (Deshabilitado según instrucciones) -->
+        <div class="col-md-2 mb-3">
+          <label for="cajero" class="form-label">Cajero</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="cajero"
+            disabled
+            placeholder="No disponible"
+          />
+        </div>
+      </div>
+
+      <div class="row align-items-end">
+        <div class="col-md-8">
+          <div class="form-check">
+            <input 
+              type="checkbox" 
+              class="form-check-input" 
+              id="pagadoEnEpago"
+              [(ngModel)]="filters.pagadoEnEpago"
+            />
+            <label class="form-check-label" for="pagadoEnEpago">
+              Pagado en botón epago
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4 text-right">
+          <button class="btn btn-light btn-icon mr-2" (click)="clearFilters()" title="Limpiar">
+            <i class="fas fa-eraser"></i>
+          </button>
+          <button class="btn btn-primary" (click)="applyFilters()">
+            <i class="fas fa-search mr-2"></i>Buscar
+          </button>
+          <button class="btn btn-success ml-2" (click)="openCreateModal()">
+            <i class="fas fa-plus mr-2"></i>Ingresar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Cargando...</span>
+    </div>
+  </div>
+
+  <!-- Tabla de Transacciones -->
+  <div *ngIf="!isLoading" class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Acciones</th>
+              <th>Cód. EPago</th>
+              <th>Fecha Solicitud Epago</th>
+              <th>Usuario Ingreso</th>
+              <th>Botón Pago</th>
+              <th>Valor</th>
+              <th>Está Pagado</th>
+              <th>Está Facturado</th>
+              <th>Valor Facturado</th>
+              <th>Valor por Facturar</th>
+              <th>Valor Anulado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of filteredTransactions">
+              <td>
+                <div class="action-buttons">
+                  <button 
+                    class="btn btn-sm btn-outline-danger mr-1" 
+                    (click)="deleteTransaction(transaction)"
+                    title="Eliminar"
+                  >
+                    <i class="fas fa-times-circle"></i>
+                  </button>
+                  <button 
+                    class="btn btn-sm btn-outline-primary" 
+                    (click)="openEditModal(transaction)"
+                    title="Editar"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </div>
+              </td>
+              <td>{{ transaction.codigoEpago }}</td>
+              <td>{{ transaction.fechaSolicitud }}</td>
+              <td>{{ transaction.usuarioIngreso }}</td>
+              <td>{{ transaction.botonPago }}</td>
+              <td>${{ transaction.valor.toFixed(2) }}</td>
+              <td>
+                <span 
+                  class="badge" 
+                  [class.badge-success]="transaction.estaPagado"
+                  [class.badge-danger]="!transaction.estaPagado"
+                >
+                  <i class="fas" [class.fa-check-circle]="transaction.estaPagado" [class.fa-times-circle]="!transaction.estaPagado"></i>
+                </span>
+              </td>
+              <td>
+                <span 
+                  class="badge" 
+                  [class.badge-success]="transaction.estaFacturado"
+                  [class.badge-danger]="!transaction.estaFacturado"
+                >
+                  <i class="fas" [class.fa-check-circle]="transaction.estaFacturado" [class.fa-times-circle]="!transaction.estaFacturado"></i>
+                </span>
+              </td>
+              <td>${{ transaction.valorFacturado.toFixed(2) }}</td>
+              <td>${{ transaction.valorPorFacturar.toFixed(2) }}</td>
+              <td>${{ transaction.valorAnulado.toFixed(2) }}</td>
+            </tr>
+            <tr *ngIf="filteredTransactions.length === 0">
+              <td colspan="11" class="text-center py-4 text-muted">
+                No se encontraron transacciones
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Crear/Editar Transacción -->
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ modalTitle }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <!-- Código EPago -->
+            <div class="col-md-6 mb-3">
+              <label for="modal_codigoEpago" class="form-label">Código EPago *</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="modal_codigoEpago"
+                [(ngModel)]="currentTransaction.codigoEpago"
+                name="codigoEpago"
+                required
+              />
+            </div>
+
+            <!-- Botón Pago -->
+            <div class="col-md-6 mb-3">
+              <label for="modal_botonPago" class="form-label">Botón Pago *</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="modal_botonPago"
+                [(ngModel)]="currentTransaction.botonPago"
+                name="botonPago"
+                required
+              />
+            </div>
+
+            <!-- Usuario Ingreso -->
+            <div class="col-md-6 mb-3">
+              <label for="modal_usuarioIngreso" class="form-label">Usuario Ingreso</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="modal_usuarioIngreso"
+                [(ngModel)]="currentTransaction.usuarioIngreso"
+                name="usuarioIngreso"
+                readonly
+              />
+            </div>
+
+            <!-- Valor -->
+            <div class="col-md-6 mb-3">
+              <label for="modal_valor" class="form-label">Valor *</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="modal_valor"
+                  [(ngModel)]="currentTransaction.valor"
+                  name="valor"
+                  step="0.01"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Está Pagado -->
+            <div class="col-md-6 mb-3">
+              <div class="form-check mt-4">
+                <input 
+                  type="checkbox" 
+                  class="form-check-input" 
+                  id="modal_estaPagado"
+                  [(ngModel)]="currentTransaction.estaPagado"
+                  name="estaPagado"
+                />
+                <label class="form-check-label" for="modal_estaPagado">
+                  Está Pagado
+                </label>
+              </div>
+            </div>
+
+            <!-- Está Facturado -->
+            <div class="col-md-6 mb-3">
+              <div class="form-check mt-4">
+                <input 
+                  type="checkbox" 
+                  class="form-check-input" 
+                  id="modal_estaFacturado"
+                  [(ngModel)]="currentTransaction.estaFacturado"
+                  name="estaFacturado"
+                />
+                <label class="form-check-label" for="modal_estaFacturado">
+                  Está Facturado
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="saveTransaction()">
+          <i class="fas fa-save mr-2"></i>{{ modalMode === 'create' ? 'Guardar' : 'Actualizar' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="module-selection-container">
+  <!-- Header -->
+  <header class="header-section">
+    <div class="container-fluid">
+      <div class="row align-items-center py-3">
+        <div class="col-md-4">
+          <div class="brand-section">
+            <h3 class="brand-name mb-0">Phantom<span class="brand-highlight">X</span></h3>
+            <span class="version-badge">V1.83</span>
+            <span class="environment-badge">Dev - Veris Test</span>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="logo-center">
+            <h4>veris<span class="veris-arrow">▼</span></h4>
+            <p class="veris-subtitle mb-0">SOMOS LA VIDA</p>
+          </div>
+        </div>
+        <div class="col-md-4 text-right">
+          <div class="user-section">
+            <span class="user-name">Veris - Kennedy</span>
+            <div class="dropdown d-inline-block ml-3">
+              <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown">
+                Lplua
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="javascript:void(0)">Perfil</a>
+                <a class="dropdown-item" href="javascript:void(0)">Configuración</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="logout()">Cerrar Sesión</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="selection-title">Selecciona el Módulo</h2>
+      </div>
+
+      <!-- Modules Grid -->
+      <div class="modules-grid">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="row">
+              <div 
+                *ngFor="let module of modules" 
+                class="col-md-6 col-lg-3 mb-4"
+              >
+                <div 
+                  class="module-card" 
+                  (click)="navigateToModule(module)"
+                  [class.featured]="module.name === 'Facturación'"
+                >
+                  <div class="module-icon">
+                    <i class="fas fa-{{ module.icon }}"></i>
+                  </div>
+                  <h5 class="module-name">{{ module.name }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

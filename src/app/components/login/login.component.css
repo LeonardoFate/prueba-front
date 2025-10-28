@@ -1,0 +1,196 @@
+.login-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.vh-100 {
+  min-height: 100vh;
+}
+
+.login-form-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+.logo-section {
+  margin-bottom: 30px;
+}
+
+.brand-name {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.brand-highlight {
+  color: #4A90E2;
+}
+
+.welcome-text {
+  font-size: 18px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.login-title {
+  font-size: 24px;
+  color: #4A90E2;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.form-label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.form-control {
+  height: 45px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
+.form-control:focus {
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+.btn-primary {
+  background-color: #7CE3A6;
+  border-color: #7CE3A6;
+  color: #fff;
+  font-weight: 600;
+  height: 50px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #6BD095;
+  border-color: #6BD095;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 227, 166, 0.3);
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+}
+
+.forgot-link {
+  color: #666;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-link:hover {
+  color: #4A90E2;
+  text-decoration: underline;
+}
+
+/* Sección de Imagen */
+.image-section {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+  overflow: hidden;
+}
+
+.veris-logo {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  text-align: right;
+  z-index: 10;
+}
+
+.veris-logo h4 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #4A90E2;
+  margin: 0;
+}
+
+.veris-arrow {
+  color: #7CE3A6;
+}
+
+.veris-subtitle {
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.doctor-image {
+  position: relative;
+  z-index: 2;
+}
+
+.doctor-placeholder {
+  width: 300px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.curved-element {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: #4A90E2;
+  border-top-left-radius: 50% 100px;
+  border-top-right-radius: 50% 100px;
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-form-container {
+    padding: 20px;
+  }
+
+  .brand-name {
+    font-size: 28px;
+  }
+
+  .login-title {
+    font-size: 20px;
+  }
+}
+
+/* Alerta */
+.alert {
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 12px 15px;
+}
+
+.alert-danger {
+  background-color: #fee;
+  border-color: #fcc;
+  color: #c33;
+}

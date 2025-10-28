@@ -1,0 +1,94 @@
+<div class="login-container">
+  <div class="row no-gutters vh-100">
+    <!-- Columna Izquierda - Formulario -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center bg-white">
+      <div class="login-form-container">
+        <div class="logo-section mb-4">
+          <h2 class="brand-name">Phantom<span class="brand-highlight">X</span></h2>
+        </div>
+
+        <h4 class="welcome-text text-muted">¡Bienvenido!</h4>
+        <h5 class="login-title text-primary mb-4">Iniciar Sesión</h5>
+
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+          <!-- Usuario o Correo Electrónico -->
+          <div class="form-group">
+            <label for="username" class="form-label">Usuario o Correo Electrónico</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              [(ngModel)]="username"
+              placeholder="Ingrese su usuario"
+              required
+            />
+          </div>
+
+          <!-- Contraseña -->
+          <div class="form-group">
+            <label for="password" class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <!-- Mensaje de Error -->
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+
+          <!-- Botón Continuar -->
+          <button
+            type="submit"
+            class="btn btn-primary btn-block btn-lg mb-3"
+            [disabled]="isLoading"
+          >
+            <span *ngIf="!isLoading">Continuar</span>
+            <span *ngIf="isLoading">
+              <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+              Cargando...
+            </span>
+          </button>
+
+          <!-- Olvidé mi usuario y/o contraseña -->
+          <div class="text-center">
+            <a href="javascript:void(0)" class="forgot-link" (click)="forgotPassword()">
+              Olvidé mi usuario y/o contraseña
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Columna Derecha - Imagen -->
+    <div class="col-md-6 d-none d-md-flex position-relative">
+      <div class="image-section">
+        <!-- Logo Veris -->
+        <div class="veris-logo">
+          <h4>veris<span class="veris-arrow">▼</span></h4>
+          <p class="veris-subtitle">JUNTO A TI</p>
+        </div>
+
+        <!-- Imagen de Fondo -->
+        <div class="background-image">
+          <div class="doctor-image">
+            <!-- Aquí iría la imagen del doctor con estetoscopio -->
+            <div class="doctor-placeholder">
+              <i class="fas fa-user-md fa-5x text-white"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Elemento decorativo curvo -->
+        <div class="curved-element"></div>
+      </div>
+    </div>
+  </div>
+</div>
