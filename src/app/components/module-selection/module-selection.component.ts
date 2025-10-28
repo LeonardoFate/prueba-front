@@ -46,6 +46,15 @@ export class ModuleSelectionComponent implements OnInit {
     this.router.navigate([module.route]);
   }
 
+  onUserChange(event: any): void {
+    const value = event.target.value;
+    if (value === 'logout') {
+      this.logout();
+      // Reset the select to default
+      event.target.selectedIndex = 0;
+    }
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
