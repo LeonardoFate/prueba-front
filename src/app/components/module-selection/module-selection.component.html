@@ -31,8 +31,8 @@
         <option>Veris - Norte</option>
       </select>
       
-      <select class="nav-dropdown" (change)="onUserChange($event)">
-        <option>Lplua</option>
+      <select class="nav-dropdown" [(ngModel)]="selectedUser" (ngModelChange)="onUserSelectionChange($event)">
+        <option value="user">Lplua</option>
         <option value="logout">Cerrar Sesión</option>
       </select>
     </div>
@@ -142,4 +142,32 @@
       </div>
     </div>
   </main>
+</div>
+
+<!-- Modal de Confirmación de Cierre de Sesión -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="logoutModalLabel">Cerrar Sesión</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancelLogout()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <div class="logout-icon mb-3">
+          <i class="fas fa-sign-out-alt fa-3x text-warning"></i>
+        </div>
+        <p class="mb-0">¿Está seguro que desea cerrar sesión?</p>
+      </div>
+      <div class="modal-footer border-0 justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelLogout()">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="confirmLogout()">
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

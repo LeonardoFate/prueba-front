@@ -16,6 +16,7 @@ import { TransaccionesEmitidasComponent } from './components/facturacion/transac
 import { FlujoMenuLateralComponent } from './components/facturacion/flujo-menu-lateral/flujo-menu-lateral.component';
 import { AgendamientoComponent } from './components/agendamiento/agendamiento.component';
 import { EpagoModalComponent } from './components/facturacion/epago-modal/epago-modal.component';
+import { ModulePlaceholderComponent } from './components/module-placeholder/module-placeholder.component';
 
 // Services
 import { AuthService } from './services/auth.service';
@@ -32,7 +33,8 @@ import { EpagoService } from './services/epago.service';
     TransaccionesEmitidasComponent,
     FlujoMenuLateralComponent,
     AgendamientoComponent,
-    EpagoModalComponent
+    EpagoModalComponent,
+    ModulePlaceholderComponent
   ],
   imports: [
     BrowserModule,

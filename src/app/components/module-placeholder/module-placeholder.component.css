@@ -17,6 +17,23 @@
   z-index: 10;
 }
 
+/* Botón de regreso */
+.back-button-container {
+  padding: 20px;
+}
+
+.back-btn {
+  color: #6c757d;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+  color: #495057;
+  text-decoration: none;
+}
+
 /* Contenido centrado */
 .placeholder-content {
   flex: 1;

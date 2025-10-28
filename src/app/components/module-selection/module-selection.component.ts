@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
+declare var $: any; // Para usar jQuery/Bootstrap
+
 interface Module {
   id: number;
   name: string;
@@ -16,6 +18,8 @@ interface Module {
 })
 export class ModuleSelectionComponent implements OnInit {
   user: any;
+  selectedUser: string = 'user';
+  
   modules: Module[] = [
     { id: 1, name: 'Agendamiento', route: '/agendamiento', icon: 'calendar' },
     { id: 2, name: 'Atenciones Prioritarias', route: '/atenciones-prioritarias', icon: 'star' },
@@ -46,17 +50,37 @@ export class ModuleSelectionComponent implements OnInit {
     this.router.navigate([module.route]);
   }
 
-  onUserChange(event: any): void {
-    const value = event.target.value;
+  onUserSelectionChange(value: string): void {
+    console.log('Usuario seleccionado:', value);
+    
     if (value === 'logout') {
-      this.logout();
-      // Reset the select to default
-      event.target.selectedIndex = 0;
+      // Mostrar el modal de confirmación
+      this.showLogoutModal();
     }
   }
 
-  logout(): void {
+  showLogoutModal(): void {
+    // Mostrar el modal usando Bootstrap
+    $('#logoutModal').modal('show');
+  }
+
+  cancelLogout(): void {
+    console.log('Cierre de sesión cancelado');
+    // Cerrar el modal
+    $('#logoutModal').modal('hide');
+    // Resetear el select al valor por defecto
+    this.selectedUser = 'user';
+  }
+
+  confirmLogout(): void {
+    console.log('Cerrando sesión confirmado...');
+    // Cerrar el modal
+    $('#logoutModal').modal('hide');
+    // Ejecutar el logout
     this.authService.logout();
-    this.router.navigate(['/login']);
+    // Redirigir al login
+    this.router.navigate(['/login']).then(() => {
+      console.log('Redirigido al login exitosamente');
+    });
   }
 }

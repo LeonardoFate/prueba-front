@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia Clínica - Atención</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-right: 1px solid #e0e0e0;
+            flex-shrink: 0;
+        }
+
+        .patient-card {
+            background: linear-gradient(135deg, #4169E1 0%, #5B7FE8 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .patient-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .patient-age {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .copy-icon {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .sidebar-links {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-links a {
+            color: #4169E1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sidebar-links a:hover {
+            text-decoration: underline;
+        }
+
+        .menu-list {
+            list-style: none;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .menu-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .menu-item.active {
+            background-color: #FFEB3B;
+            border-color: #FDD835;
+            font-weight: 600;
+        }
+
+        .menu-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .menu-item.active .menu-number {
+            background-color: #fff;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            background-color: #fff;
+            border-bottom: 3px solid #4CAF50;
+            padding: 16px 24px;
+        }
+
+        .breadcrumb {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb span {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: 2px solid;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-outline-blue {
+            border-color: #4169E1;
+            color: #4169E1;
+        }
+
+        .btn-outline-blue:hover {
+            background-color: #4169E1;
+            color: white;
+        }
+
+        .btn-solid-blue {
+            background-color: #4169E1;
+            border-color: #4169E1;
+            color: white;
+        }
+
+        .btn-solid-blue:hover {
+            background-color: #3557C7;
+        }
+
+        /* Content Area */
+        .content-area {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .btn-new-order {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 2px solid #4169E1;
+            border-radius: 6px;
+            background-color: white;
+            color: #4169E1;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-new-order:hover {
+            background-color: #f0f4ff;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-create {
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+
+        .btn-create:hover {
+            background-color: #f1f8f4;
+        }
+
+        .btn-cancel {
+            border-color: #f44336;
+            color: #f44336;
+        }
+
+        .btn-cancel:hover {
+            background-color: #ffebee;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 24px;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .form-input,
+        .form-select {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: white;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #4169E1;
+        }
+
+        .form-input::placeholder {
+            color: #aaa;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .benefit-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .benefit-icon {
+            width: 20px;
+            height: 20px;
+            color: #f44336;
+        }
+
+        .radio-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .radio-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .radio-input-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .radio-input-group input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 40px 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #f8f9fa;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4169E1;
+            cursor: pointer;
+        }
+
+        .diagnostics-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .diagnostic-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .diagnostic-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .diagnostic-inputs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .diagnostic-inputs .search-input {
+            font-size: 13px;
+            padding: 8px 32px 8px 10px;
+        }
+
+        .diagnostic-inputs .search-icon {
+            right: 8px;
+        }
+
+        @media (max-width: 1200px) {
+            .filter-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .diagnostics-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .filter-row,
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="patient-card">
+                <div class="patient-name">Bustamante Sánchez<br>Diana</div>
+                <div class="patient-age">33 AÑOS 5 MESES</div>
+                <svg class="copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+            </div>
+
+            <div class="sidebar-links">
+                <a href="#">Visión 360</a>
+                <a href="#">Actualizar Datos</a>
+            </div>
+
+            <ul class="menu-list">
+                <li class="menu-item active">
+                    <span class="menu-number">1</span>
+                    <span>Ordenes para factura manual</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-number">2</span>
+                    <span>Cierre de caja</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-number">3</span>
+                    <span>Registros Facturas</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-number">4</span>
+                    <span>Diagnósticos</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-number">5</span>
+                    <span>Procedimiento Médico</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-number">6</span>
+                    <span>Recomendaciones</span>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="breadcrumb">
+                    Historia Clínica → <span>Atención</span>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-outline-blue">Enviar Correo</button>
+                    <button class="btn btn-outline-blue">Evt. Adverso</button>
+                    <button class="btn btn-outline-blue">Ver Historial</button>
+                    <button class="btn btn-outline-blue">Cerrar Historia</button>
+                    <button class="btn btn-solid-blue">Consulta CDS</button>
+                    <button class="btn btn-solid-blue">Guardar Sección</button>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="content-header">
+                    <button class="btn-new-order">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            <path stroke-linecap="round" stroke-width="2" d="M12 8v8m-4-4h8"/>
+                        </svg>
+                        Nueva Orden
+                    </button>
+                    <div class="order-actions">
+                        <button class="btn btn-create">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Crear Orden
+                        </button>
+                        <button class="btn btn-cancel">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                            Anular Orden
+                        </button>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Ordenes Para Factura Manual</h2>
+
+                <!-- Filter Row -->
+                <div class="filter-row">
+                    <div class="form-group">
+                        <label class="form-label">N° de Orden</label>
+                        <input type="text" class="form-input" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Paciente</label>
+                        <input type="text" class="form-input" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Estado</label>
+                        <input type="text" class="form-input" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Días de Validez</label>
+                        <input type="text" class="form-input" placeholder="">
+                    </div>
+                </div>
+
+                <!-- Form Row -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Fecha</label>
+                        <input type="date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tipo Orden</label>
+                        <select class="form-select">
+                            <option value="">Seleccionar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Atención Preferencial</label>
+                        <select class="form-select">
+                            <option value="">Seleccionar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Es</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="urgente">
+                            <label for="urgente">Urgente</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Beneficio</label>
+                        <div class="benefit-badge">
+                            <svg class="benefit-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            Particular
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Radio Section -->
+                <div class="radio-section">
+                    <div class="radio-group">
+                        <label class="radio-label">Médico Interno</label>
+                        <div class="radio-input-group">
+                            <input type="radio" name="medico" id="interno" checked>
+                            <div class="search-input-wrapper">
+                                <input type="text" class="search-input" placeholder="">
+                                <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                                    <path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="radio-group">
+                        <label class="radio-label">Médico Externo</label>
+                        <div class="radio-input-group">
+                            <input type="radio" name="medico" id="externo">
+                            <div class="search-input-wrapper">
+                                <input type="text" class="search-input" placeholder="" disabled>
+                                <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                                    <path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diagnostics Section -->
+                <div class="diagnostics-section">
+                    <div class="diagnostic-card">
+                        <h3 class="diagnostic-title">Diagnóstico Principal</h3>
+                        <div class="diagnostic-inputs">
+                            <div class="search-input-wrapper">
+                                <input type="text" class="search-input" placeholder="Código CIE">
+                                <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                                    <path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                            <div class="search-input-wrapper">
+                                <input type="text" class="search-input" placeholder="Nombre Diagnóstico">
+                                <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                                    <path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="diagnostic-card">
+                        <h3 class="diagnostic-title">Diagnóstico Secundario 1</h3>
+                        <div class="diagnostic-inputs">
+                            <div class="search-input-wrapper">
+                                <input type="text" class="search-input" placeholder="Código CIE">
+                                <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                                    <path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                            <div class="search-input-wrapper">
+                                <input type="text" class="search-input" placeholder="Nombre Diagnóstico">
+                                <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                                    <path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="diagnostic-card">
+                        <h3 class="diagnostic-title">Diagnóstico Secundario 2</h3>
+                        <div class="diagnostic-inputs">
+                            <div class="search-input-wrapper">
+                                <input type="text" class="search-input" placeholder="Código CIE">
+                                <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                                    <path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                            <div class="search-input-wrapper">
+                                <input type="text" class="search-input" placeholder="Nombre Diagnóstico">
+                                <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                                    <path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

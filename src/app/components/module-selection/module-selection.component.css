@@ -216,3 +216,155 @@ body {
     font-size: 24px;
   }
 }
+
+/* Estilos mejorados para el Modal de Logout */
+/* Reemplaza los estilos anteriores con estos */
+
+#logoutModal .modal-dialog {
+  max-width: 400px;
+}
+
+#logoutModal .modal-content {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+#logoutModal .modal-header {
+  padding: 25px 30px 15px;
+  border-bottom: none;
+}
+
+#logoutModal .modal-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  width: 100%;
+  text-align: left;
+}
+
+#logoutModal .close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 28px;
+  font-weight: 300;
+  color: #999;
+  opacity: 1;
+  transition: color 0.2s;
+}
+
+#logoutModal .close:hover {
+  color: #333;
+}
+
+#logoutModal .modal-body {
+  padding: 20px 30px 30px;
+  text-align: center;
+}
+
+#logoutModal .modal-body p {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+/* Icono mejorado - más grande y bonito */
+#logoutModal .logout-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 25px;
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe8b3 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+}
+
+#logoutModal .logout-icon i {
+  color: #ffc107;
+  font-size: 48px;
+}
+
+#logoutModal .modal-footer {
+  padding: 0 30px 30px;
+  border-top: none;
+  justify-content: center;
+  gap: 12px;
+}
+
+#logoutModal .btn {
+  padding: 12px 35px;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: 15px;
+  min-width: 120px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+#logoutModal .btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+#logoutModal .btn-secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+#logoutModal .btn-primary {
+  background-color: #4A90E2;
+  color: white;
+}
+
+#logoutModal .btn-primary:hover {
+  background-color: #3a7bc8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+/* Animación suave del modal */
+#logoutModal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+  transform: scale(0.9);
+}
+
+#logoutModal.show .modal-dialog {
+  transform: scale(1);
+}
+
+/* Backdrop más oscuro */
+.modal-backdrop.show {
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  #logoutModal .modal-dialog {
+    margin: 10px;
+  }
+  
+  #logoutModal .modal-content {
+    border-radius: 12px;
+  }
+  
+  #logoutModal .logout-icon {
+    width: 80px;
+    height: 80px;
+  }
+  
+  #logoutModal .logout-icon i {
+    font-size: 36px;
+  }
+  
+  #logoutModal .btn {
+    padding: 10px 25px;
+    min-width: 100px;
+    font-size: 14px;
+  }
+}

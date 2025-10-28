@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
 import { ModuleSelectionComponent } from './components/module-selection/module-selection.component';
 import { FacturacionLayoutComponent } from './components/facturacion/facturacion-layout/facturacion-layout.component';
 import { TransaccionesEpagoComponent } from './components/facturacion/transacciones-epago/transacciones-epago.component';
@@ -8,15 +9,23 @@ import { FlujoMenuLateralComponent } from './components/facturacion/flujo-menu-l
 import { ModulePlaceholderComponent } from './components/module-placeholder/module-placeholder.component';
 
 const routes: Routes = [
+  // Ruta por defecto - Redirigir al login
   {
     path: '',
-    redirectTo: '/module-selection',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
+  // Ruta del Login - ¡ESTA FALTABA!
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  // Ruta de selección de módulos
   {
     path: 'module-selection',
     component: ModuleSelectionComponent
   },
+  // Rutas de Facturación
   {
     path: 'facturacion',
     component: FacturacionLayoutComponent,
@@ -69,9 +78,10 @@ const routes: Routes = [
     path: 'seguridad',
     component: ModulePlaceholderComponent
   },
+  // Ruta wildcard - Cualquier ruta no encontrada redirige al login
   {
     path: '**',
-    redirectTo: '/module-selection'
+    redirectTo: '/login'
   }
 ];
 
