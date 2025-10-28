@@ -48,7 +48,7 @@ Editar `src/environments/environment.ts`:
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api'  // URL de tu backend
+  apiUrl: 'http://localhost:3000/api'
 };
 ```
 
@@ -106,7 +106,6 @@ frontend-prueba/
 |------------|---------|-----------|
 | **Angular** | 9.1.0 | Framework principal frontend |
 | **TypeScript** | 3.8.3 | Lenguaje de programación |
-| **SCSS/Sass** | - | Pre-procesador CSS |
 | **HTML5** | - | Marcado semántico |
 
 ### Librerías Frontend
