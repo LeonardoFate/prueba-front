@@ -120,18 +120,6 @@ frontend-prueba/
 | **jQuery** | 3.7.1 | Requerido por Bootstrap y Select2 |
 | **Font Awesome** | 5.15.4 | Librería de iconos |
 
-### Dependencias de Desarrollo
-
-| Herramienta | Propósito |
-|-------------|-----------|
-| **Angular CLI** | Herramientas de línea de comandos |
-| **Karma** | Test runner para pruebas unitarias |
-| **Jasmine** | Framework de testing |
-| **TSLint** | Linter para TypeScript |
-| **Codelyzer** | Reglas de linting específicas de Angular |
-
----
-
 ## Componentes de la Aplicación
 
 ### 1. **LoginComponent** (`src/app/components/login/`)
