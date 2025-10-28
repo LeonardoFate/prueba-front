@@ -54,7 +54,7 @@ export const environment = {
 
 ### 4. Ejecutar el proyecto
 ```bash
-ng serve
+npm start
 ```
 
 La aplicación estará disponible en: `http://localhost:4200`
