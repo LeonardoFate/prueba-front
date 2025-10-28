@@ -296,7 +296,9 @@ frontend-prueba/
 - Información de usuario
 - Botón de logout
 
+## 📝 Licencia
 
+Este proyecto fue desarrollado como prueba técnica para demostración de habilidades en Angular 9.
 
 
 
