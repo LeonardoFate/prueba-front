@@ -7,7 +7,7 @@ Aplicación web desarrollada con Angular 9 para la gestión de módulos médicos
 
 ## Requisitos del Sistema
 
-### Antes de continuar con la configuracion del front, primero asegurese de descargar el back, el back utilizado es de la prueba anterior por lo que al clonarlo se descargara una carpeta fornt la cual puede eliminarla.
+### Antes de continuar con la configuracion del front, primero asegurese de descargar el back, el back utilizado es de la prueba anterior por lo que al clonarlo se descargara una carpeta front la cual puede eliminarla.
 
 ```bash
 git clone https://github.com/LeonardoFate/prueba-historia-clinica.git
