@@ -8,9 +8,21 @@ import { Router } from '@angular/router';
 })
 export class FacturacionLayoutComponent implements OnInit {
   submenuItems = [
-    { label: 'Transacciones Epago', route: '/facturacion/transacciones-epago' },
-    { label: 'Transacciones Emitidas pacientes', route: '/facturacion/transacciones-emitidas' },
-    { label: 'Flujo con menú lateral', route: '/facturacion/flujo-menu-lateral' }
+    { 
+      label: 'Transacciones Epago', 
+      route: '/facturacion/transacciones-epago',
+      icon: 'fa-credit-card'
+    },
+    { 
+      label: 'Transacciones Emitidas pacientes', 
+      route: '/facturacion/transacciones-emitidas',
+      icon: 'fa-file-invoice'
+    },
+    { 
+      label: 'Flujo con menú lateral', 
+      route: '/facturacion/flujo-menu-lateral',
+      icon: 'fa-bars'
+    }
   ];
 
   constructor(private router: Router) { }
@@ -19,7 +31,7 @@ export class FacturacionLayoutComponent implements OnInit {
   }
 
   isActive(route: string): boolean {
-    return this.router.url.includes(route);
+    return this.router.url === route;
   }
 
   navigateTo(route: string): void {

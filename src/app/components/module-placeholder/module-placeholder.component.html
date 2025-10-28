@@ -1,12 +1,36 @@
 <div class="module-placeholder-container">
   <!-- Barra verde superior -->
-  <div class="green-bar"></div>
+  <div class="submenu-bar">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center justify-content-between">
+        <!-- Botón de regreso y menú -->
+        <div class="d-flex align-items-center">
+          <button class="btn btn-link back-button" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          
+          <!-- Menú horizontal -->
+          <nav class="submenu-nav">
+            <a class="submenu-item">Movimientos</a>
+            <a class="submenu-item">Transacciones</a>
+            <a class="submenu-item">Gestión</a>
+            <a class="submenu-item">Informes</a>
+          </nav>
+        </div>
 
-  <!-- Botón de regreso -->
-  <div class="back-button-container">
-    <button class="btn btn-link back-btn" (click)="goBack()">
-      <i class="fas fa-arrow-left"></i> Regresar a Módulos
-    </button>
+        <!-- Botones de la derecha -->
+        <div class="d-flex align-items-center">
+          <button class="btn btn-sm btn-link text-white mr-3">
+            <i class="fas fa-question-circle mr-1"></i> Ayuda
+          </button>
+          
+          <!-- Nombre del módulo -->
+          <div class="module-name-badge">
+            {{ moduleName }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Contenido centrado -->

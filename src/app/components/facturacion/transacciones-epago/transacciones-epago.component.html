@@ -22,18 +22,6 @@
           />
         </div>
 
-        <!-- Paciente (Deshabilitado según instrucciones) -->
-        <div class="col-md-3 mb-3">
-          <label for="paciente" class="form-label">Paciente</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            id="paciente"
-            disabled
-            placeholder="No disponible"
-          />
-        </div>
-
         <!-- Fecha Desde -->
         <div class="col-md-2 mb-3">
           <label for="fechaDesde" class="form-label">Fecha Desde</label>
@@ -58,43 +46,20 @@
           />
         </div>
 
-        <!-- Cajero (Deshabilitado según instrucciones) -->
-        <div class="col-md-2 mb-3">
-          <label for="cajero" class="form-label">Cajero</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            id="cajero"
-            disabled
-            placeholder="No disponible"
-          />
-        </div>
-      </div>
-
-      <div class="row align-items-end">
-        <div class="col-md-8">
-          <div class="form-check">
-            <input 
-              type="checkbox" 
-              class="form-check-input" 
-              id="pagadoEnEpago"
-              [(ngModel)]="filters.pagadoEnEpago"
-            />
-            <label class="form-check-label" for="pagadoEnEpago">
-              Pagado en botón epago
-            </label>
+        <!-- Botones -->
+        <div class="col-md-5 mb-3">
+          <label class="form-label d-block">&nbsp;</label>
+          <div class="d-flex align-items-center justify-content-end">
+            <button class="btn btn-light btn-icon mr-2" (click)="clearFilters()" title="Limpiar">
+              <i class="fas fa-eraser"></i>
+            </button>
+            <button class="btn btn-primary mr-2" (click)="applyFilters()">
+              <i class="fas fa-search mr-2"></i>Buscar
+            </button>
+            <button class="btn btn-success" (click)="openCreateModal()">
+              <i class="fas fa-plus mr-2"></i>Ingresar
+            </button>
           </div>
-        </div>
-        <div class="col-md-4 text-right">
-          <button class="btn btn-light btn-icon mr-2" (click)="clearFilters()" title="Limpiar">
-            <i class="fas fa-eraser"></i>
-          </button>
-          <button class="btn btn-primary" (click)="applyFilters()">
-            <i class="fas fa-search mr-2"></i>Buscar
-          </button>
-          <button class="btn btn-success ml-2" (click)="openCreateModal()">
-            <i class="fas fa-plus mr-2"></i>Ingresar
-          </button>
         </div>
       </div>
     </div>

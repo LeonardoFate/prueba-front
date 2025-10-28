@@ -2,25 +2,53 @@
   <!-- Submenu de Facturación -->
   <div class="submenu-bar">
     <div class="container-fluid">
-      <div class="d-flex align-items-center">
-        <button class="btn btn-link back-button" (click)="goBack()">
-          <i class="fas fa-arrow-left"></i>
-        </button>
-        <nav class="submenu-nav">
-          <a 
-            *ngFor="let item of submenuItems" 
-            [class.active]="isActive(item.route)"
-            (click)="navigateTo(item.route)"
-            class="submenu-item"
-          >
-            {{ item.label }}
-          </a>
-        </nav>
-        <div class="ml-auto">
-          <span class="module-title">Facturación</span>
-          <button class="btn btn-sm btn-outline-light ml-2">
-            <i class="fas fa-question-circle"></i> Ayuda
+      <div class="d-flex align-items-center justify-content-between">
+        <!-- Botón de regreso y menú -->
+        <div class="d-flex align-items-center">
+          <button class="btn btn-link back-button" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
           </button>
+          
+          <!-- Menú horizontal -->
+          <nav class="submenu-nav">
+            <a class="submenu-item">Movimientos</a>
+            <a class="submenu-item">Transacciones</a>
+            <a class="submenu-item">Gestión</a>
+            <a class="submenu-item">Informes</a>
+          </nav>
+        </div>
+
+        <!-- Botones de la derecha -->
+        <div class="d-flex align-items-center">
+          <button class="btn btn-sm btn-link text-white mr-3">
+            <i class="fas fa-question-circle mr-1"></i> Ayuda
+          </button>
+          
+          <!-- Dropdown de Facturación -->
+          <div class="dropdown">
+            <button 
+              class="btn btn-facturacion dropdown-toggle" 
+              type="button" 
+              id="facturacionDropdown" 
+              data-toggle="dropdown" 
+              aria-haspopup="true" 
+              aria-expanded="false"
+            >
+              Facturación
+              <i class="fas fa-chevron-down ml-2"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="facturacionDropdown">
+              <a 
+                *ngFor="let item of submenuItems" 
+                class="dropdown-item"
+                [class.active]="isActive(item.route)"
+                (click)="navigateTo(item.route)"
+              >
+                <i [class]="'fas ' + item.icon + ' mr-2'"></i>
+                {{ item.label }}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
