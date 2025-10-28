@@ -1,38 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api'; // Cambiar según backend
+  private apiUrl = environment.apiUrl;  // ⭐ Usar environment
 
   constructor(private http: HttpClient) { }
 
-  // Simulación de login con datos quemados
+  // ⭐ Actualizar método login para usar backend real
   login(username: string, password: string): Observable<any> {
-    // Para prueba, aceptar cualquier usuario/contraseña
-    // En producción, descomentar la línea del HTTP
-    // return this.http.post(`${this.apiUrl}/login`, { username, password });
-    
-    // Simulación
-    if (username && password) {
-      return of({
-        success: true,
-        token: 'fake-jwt-token',
-        user: {
-          username: username,
-          name: 'Usuario Demo'
+    return this.http.post(`${this.apiUrl}/auth/login`, { 
+      username, 
+      password 
+    }).pipe(
+      map((response: any) => {
+        // El backend retorna { success, message, data: { token, user } }
+        if (response.success && response.data) {
+          return {
+            success: true,
+            token: response.data.token,
+            user: response.data.user,
+            message: response.message
+          };
         }
-      }).pipe(delay(500));
-    } else {
-      return of({
-        success: false,
-        message: 'Credenciales inválidas'
-      }).pipe(delay(500));
-    }
+        return response;
+      })
+    );
   }
 
   isAuthenticated(): boolean {

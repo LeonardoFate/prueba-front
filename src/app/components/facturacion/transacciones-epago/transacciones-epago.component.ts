@@ -87,21 +87,34 @@ export class TransaccionesEpagoComponent implements OnInit, AfterViewInit {
     }
   }
 
-  loadTransactions(): void {
-    this.isLoading = true;
-    this.epagoService.getTransactions().subscribe(
-      data => {
-        this.transactions = data;
-        this.filteredTransactions = [...data];
-        this.isLoading = false;
-      },
-      error => {
-        console.error('Error al cargar transacciones:', error);
-        this.isLoading = false;
-        alert('Error al cargar las transacciones. Por favor intente nuevamente.');
-      }
-    );
+loadTransactions(): void {
+  this.isLoading = true;
+
+  const filters = {};
+  if (this.filters.codigoEpago) {
+    filters['codigoEpago'] = this.filters.codigoEpago;
   }
+  if (this.filters.fechaDesde) {
+    filters['fechaDesde'] = this.filters.fechaDesde;
+  }
+  if (this.filters.fechaHasta) {
+    filters['fechaHasta'] = this.filters.fechaHasta;
+  }
+  
+
+  this.epagoService.getTransactions(filters).subscribe(
+    data => {
+      this.transactions = data;
+      this.filteredTransactions = [...data];
+      this.isLoading = false;
+    },
+    error => {
+      console.error('Error al cargar transacciones:', error);
+      this.isLoading = false;
+      alert('Error al cargar las transacciones. Por favor intente nuevamente.');
+    }
+  );
+}
 
   applyFilters(): void {
     this.isLoading = true;
