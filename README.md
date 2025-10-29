@@ -57,6 +57,12 @@ export const environment = {
 npm start
 ```
 
+### 6. Iniciar sesion
+```bash
+Usuario: admin
+Contrasenia: admin123
+```
+
 La aplicación estará disponible en: `http://localhost:4200`
 
 ---
